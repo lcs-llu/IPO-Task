@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State var inputUnit: String = ""
-    
+    @State var currentUnit: Unit = listOfUnits.randomElement()!
+    @State var isAnswerShowing = false
     var body: some View {
         NavigationView{
             VStack{
@@ -20,8 +21,18 @@ struct ContentView: View {
                 Text("Short Form Input")
                 .font(.headline)
                 
-                TextField("Parental Unit", text: $inputUnit, prompt: Text("short form"))
+                TextField("Parental Unit", text: $inputUnit, prompt: Text("Enter the short form"))
                 
+                Button(action: {
+                    withAnimation {
+                        if inputUnit == currentUnit.translation {
+                            isAnswerShowing = true
+                        }
+                    }
+                }, label: {
+                    Text("Check")
+                })
+                    .buttonStyle(.bordered)
                 
                 Spacer()
             }
