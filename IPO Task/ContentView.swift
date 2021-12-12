@@ -8,14 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var inputUnit: String = ""
+    
     var body: some View {
-        Text("Hello, world!")
+        NavigationView{
+            VStack{
+                Image("Image1")
+                    .resizable()
+                    .scaledToFit()
+                
+                Text("Short Form Input")
+                .font(.headline)
+                
+                TextField("Parental Unit", text: $inputUnit, prompt: Text("short form"))
+                
+                
+                Spacer()
+            }
             .padding()
+            .navigationTitle("Parental Unit Translation Device")
+        }
+        
+            
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NavigationView {
+            ContentView()
+        }
     }
 }
