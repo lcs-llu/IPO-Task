@@ -11,15 +11,22 @@ struct ContentView: View {
     @State var inputUnit: String = ""
     @State var currentUnit: Unit = listOfUnits.randomElement()!
     var output: String {
-        if inputUnit == currentUnit.shortForm {
-            return "\(currentUnit.translation)"
+        
+        for currentUnit in listOfUnits {
+            
+            if inputUnit == currentUnit.shortForm {
+                return "\(currentUnit.translation)"
+            }
+            
+
         }
         
-        else { return String(inputUnit)
+        // No shortform exists for what the user provided
+        return inputUnit
+        
+        
     }
     
-    }
-
     var body: some View {
         NavigationView{
             VStack{
@@ -28,19 +35,21 @@ struct ContentView: View {
                     .scaledToFit()
                 
                 Text("Short Form Input")
-                .font(.headline)
+                    .font(.headline)
                 
                 TextField("Parental Unit", text: $inputUnit, prompt: Text("Enter the short form"))
                 
-                Text(currentUnit.translation)
+                
+                Text(output)
+                
             }
             .padding()
             .navigationTitle("Parental Unit Translation Device")
         }
         
-            
+        
     }
-
+    
 }
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
