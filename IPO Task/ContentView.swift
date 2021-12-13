@@ -10,7 +10,16 @@ import SwiftUI
 struct ContentView: View {
     @State var inputUnit: String = ""
     @State var currentUnit: Unit = listOfUnits.randomElement()!
-    @State var isAnswerShowing = false
+    var output: String {
+        if inputUnit == currentUnit.shortForm {
+            return "\(currentUnit.translation)"
+        }
+        
+        else { return String(inputUnit)
+    }
+    
+    }
+
     var body: some View {
         NavigationView{
             VStack{
@@ -23,18 +32,7 @@ struct ContentView: View {
                 
                 TextField("Parental Unit", text: $inputUnit, prompt: Text("Enter the short form"))
                 
-                Button(action: {
-                    withAnimation {
-                        if inputUnit == currentUnit.translation {
-                            isAnswerShowing = true
-                        }
-                    }
-                }, label: {
-                    Text("Check")
-                })
-                    .buttonStyle(.bordered)
-                
-                Spacer()
+                Text(currentUnit.translation)
             }
             .padding()
             .navigationTitle("Parental Unit Translation Device")
@@ -42,8 +40,8 @@ struct ContentView: View {
         
             
     }
-}
 
+}
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
